@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-body {
-	font-family: "Lato", sans-serif;
-}
-
 .main-head {
 	height: 150px;
 	background: #FFF;
@@ -67,4 +63,9 @@ body {
 .btn-black {
 	background-color: #000 !important;
 	color: #fff;
+}
+
+.navbar{
+	padding: 10px 10px;
+	margin-top: 10px;
 }
