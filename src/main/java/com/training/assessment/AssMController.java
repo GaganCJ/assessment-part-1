@@ -8,7 +8,7 @@ public class AssMController {
 	
 	@RequestMapping(value="/login")
 	public String loginUser() {
-		return "AssessmentList";
+		return "Choose_Assessment";
 	}
 
 }
