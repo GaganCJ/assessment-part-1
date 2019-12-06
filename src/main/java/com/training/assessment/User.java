@@ -7,22 +7,27 @@ import javax.validation.constraints.NotNull;
 @Table(name = "user_tbl")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
 	
 	@NotNull
 	private String password;
 	
+	public enum userAccess{
+			Admin,
+			Employee
+	};
+	
 	@NotNull
-	private boolean userAccess;
+	private userAccess _userAccess;
+	
 	public User() {
 		
 	}
-	public User(int userId, String password, boolean userAccess) {
+	public User(int userId, String password, userAccess uAc) {
 		super();
 		this.userId = userId;
 		this.password = password;
-		this.userAccess = userAccess;
+		this._userAccess = uAc;
 	}
 	public int getUserId() {
 		return userId;
@@ -36,11 +41,10 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean isUserAccess() {
-		return userAccess;
+	public userAccess get_userAccess() {
+		return _userAccess;
 	}
-	public void setUserAccess(boolean userAccess) {
-		this.userAccess = userAccess;
-	}
-	
+	public void set_userAccess(userAccess _userAccess) {
+		this._userAccess = _userAccess;
+	}	
 }

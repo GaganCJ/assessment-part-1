@@ -43,7 +43,7 @@
 										</div>
 									</div>
 									<div class="card-body">
-										<form id="signupform" class="form-horizontal" role="form">
+										<form id="signupform" class="form-horizontal" role="form" action="/register/technical" method="post">
 											<div id="signupalert" style="display: none"
 												class="alert alert-danger">
 												<p>Error:</p>
@@ -54,7 +54,7 @@
 													ID</label>
 												<div class="col-md-9">
 													<input type="text" class="form-control" name="userid"
-														placeholder="User ID">
+														disabled th:value="${userID}" th:placeholder="${userID}">
 												</div>
 											</div>
 											<div class="form-group">
@@ -114,7 +114,7 @@
 										</div>
 									</div>
 									<div class="card-body">
-										<form id="signupform" class="form-horizontal" role="form">
+										<form id="signupform" class="form-horizontal" role="form" action="/register/behavioral">
 											<div id="signupalert" style="display: none"
 												class="alert alert-danger">
 												<p>Error:</p>
@@ -125,7 +125,7 @@
 													ID</label>
 												<div class="col-md-9">
 													<input type="text" class="form-control" name="userid"
-														placeholder="User ID">
+														disabled th:value="${userID}" th:placeholder="${userID}">
 												</div>
 											</div>
 											<div class="form-group">

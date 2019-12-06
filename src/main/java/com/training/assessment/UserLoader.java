@@ -6,6 +6,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import com.training.assessment.User.userAccess;
+
 @Component
 public class UserLoader implements ApplicationListener<ContextRefreshedEvent>{
 
@@ -24,7 +26,7 @@ public class UserLoader implements ApplicationListener<ContextRefreshedEvent>{
 		User user1 = new User();
 		user1.setUserId(1001);
 		user1.setPassword("user1001");
-		user1.setUserAccess(true);
+		user1.set_userAccess(userAccess.Admin);
 		userRepo.save(user1);
 		
 		log.info("User Recorder - ID : "+user1.getUserId());
@@ -32,7 +34,7 @@ public class UserLoader implements ApplicationListener<ContextRefreshedEvent>{
 		User user2 = new User();
 		user2.setUserId(1088);
 		user2.setPassword("user1088");
-		user2.setUserAccess(false);
+		user2.set_userAccess(userAccess.Employee);
 		userRepo.save(user2);
 		
 		log.info("User Recorder - ID : "+user2.getUserId());
@@ -40,7 +42,7 @@ public class UserLoader implements ApplicationListener<ContextRefreshedEvent>{
 		User user3 = new User();
 		user3.setUserId(2192);
 		user3.setPassword("user2192");
-		user3.setUserAccess(false);
+		user3.set_userAccess(userAccess.Employee);
 		userRepo.save(user3);
 		
 		log.info("User Recorder - ID : "+user3.getUserId());
@@ -48,7 +50,7 @@ public class UserLoader implements ApplicationListener<ContextRefreshedEvent>{
 		User user4 = new User();
 		user4.setUserId(3122);
 		user4.setPassword("user3122");
-		user4.setUserAccess(false);
+		user4.set_userAccess(userAccess.Employee);
 		userRepo.save(user4);
 		
 		log.info("User Recorder - ID : "+user4.getUserId());
