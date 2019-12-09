@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Assessment Management | Choose Assessment</title>
-<link href="bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/custom.css" rel="stylesheet" />
-<script src="bootstrap-4.3.1-dist/js/jquery-3.3.1.min.js"></script>
-<script src="bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
-<script src="bootstrap-4.3.1-dist/js/popper.min.js"></script>
+<link href="/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/css/custom.css" rel="stylesheet" />
+<script src="/bootstrap-4.3.1-dist/js/jquery-3.3.1.min.js"></script>
+<script src="/bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<script src="/bootstrap-4.3.1-dist/js/popper.min.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -16,7 +16,10 @@
 			<ul class="navbar-nav">
 				<li class="row">
 					<div class="col-sm-2">
-						<a href="#">Logout</a>
+						<span id="thid" style="display:none;" th:text="${userId}"></span>
+					</div>
+					<div class="col-sm-2">
+						<a href="/logout">Logout</a>
 					</div>
 				</li>
 			</ul>
@@ -27,8 +30,8 @@
 					<div class="card">
 						<div class="card-header text-center" id="headingOne">
 							<h5>
-								<a id="techA" data-toggle="collapse"
-									href="#collapseExample1" role="button" aria-expanded="false"
+								<a id="techA" data-toggle="collapse" href="#collapseExample1"
+									role="button" aria-expanded="false"
 									aria-controls="collapseExample1">Register for Technical
 									Assessment</a>
 							</h5>
@@ -43,7 +46,8 @@
 										</div>
 									</div>
 									<div class="card-body">
-										<form id="signupform" class="form-horizontal" role="form" action="/register/technical" method="post">
+										<form id="signupform" class="form-horizontal" role="form"
+											action="/register/technical" method="post">
 											<div id="signupalert" style="display: none"
 												class="alert alert-danger">
 												<p>Error:</p>
@@ -53,8 +57,8 @@
 												<label for="usedid" class="col-md-3 control-label">User
 													ID</label>
 												<div class="col-md-9">
-													<input type="text" class="form-control" name="userid"
-														disabled th:value="${userID}" th:placeholder="${userID}">
+													<input type="text" class="form-control" name="userid" id="userId"
+														disabled>
 												</div>
 											</div>
 											<div class="form-group">
@@ -82,7 +86,7 @@
 											<div class="form-group">
 												<!-- Button -->
 												<div class="col-md-offset-3 col-md-9">
-													<button id="btn-signup" type="button" class="btn btn-info">
+													<button id="btn-signup" type="submit" class="btn btn-info">
 														<i class="icon-hand-right"></i>Register
 													</button>
 												</div>
@@ -114,7 +118,8 @@
 										</div>
 									</div>
 									<div class="card-body">
-										<form id="signupform" class="form-horizontal" role="form" action="/register/behavioral">
+										<form id="signupform" class="form-horizontal" role="form"
+											action="/register/behavioral" method="post">
 											<div id="signupalert" style="display: none"
 												class="alert alert-danger">
 												<p>Error:</p>
@@ -124,8 +129,8 @@
 												<label for="usedid" class="col-md-3 control-label">User
 													ID</label>
 												<div class="col-md-9">
-													<input type="text" class="form-control" name="userid"
-														disabled th:value="${userID}" th:placeholder="${userID}">
+													<input type="text" class="form-control" name="userid" id="userId"
+														disabled>
 												</div>
 											</div>
 											<div class="form-group">
@@ -150,7 +155,7 @@
 											<div class="form-group">
 												<!-- Button -->
 												<div class="col-md-offset-3 col-md-9">
-													<button id="btn-signup" type="button" class="btn btn-info">
+													<button id="btn-signup" type="submit" class="btn btn-info">
 														<i class="icon-hand-right"></i>Register
 													</button>
 												</div>
@@ -166,4 +171,9 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+	});
+</script>
 </html>
