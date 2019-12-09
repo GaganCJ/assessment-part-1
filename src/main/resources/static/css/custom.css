@@ -60,15 +60,22 @@
 	font-weight: 300;
 }
 
-.btn-black {
+.btn-black:hover {
 	background-color: #000 !important;
 	color: #fff;
 }
 
-.navbar{
+.btn-black {
+	background-color: #fff !important;
+	color: #000;
+	border-color: black !important;
+}
+
+.navbar {
 	padding: 10px 10px;
 	margin-top: 10px;
 }
-a{
+
+a {
 	text-decoration: none !important;
 }
