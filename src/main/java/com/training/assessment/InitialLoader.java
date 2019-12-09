@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import com.training.assessment.User.userAccess;
 
 @Component
-public class UserLoader implements ApplicationListener<ContextRefreshedEvent>{
+public class InitialLoader implements ApplicationListener<ContextRefreshedEvent>{
 
 	@Autowired
 	private UserRepo userRepo;
@@ -19,7 +19,7 @@ public class UserLoader implements ApplicationListener<ContextRefreshedEvent>{
 	@Autowired
 	private AssessRepo assessRepo;
 	
-	private Logger log = Logger.getLogger(UserLoader.class);
+	private Logger log = Logger.getLogger(InitialLoader.class);
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {

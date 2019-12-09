@@ -3,7 +3,6 @@ package com.training.assessment;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +32,11 @@ public class AssMController {
 		assessRepo.findAll().forEach(assess::add);
 		return assess;
 	}
+	
+	public User getBySession(HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute("user");
+		return user;
+	}
 
 	@RequestMapping(value = "/login")
 	public String loginUser() {
@@ -42,12 +46,13 @@ public class AssMController {
 	@PostMapping(value = "/login/validate")
 	@ResponseBody
 	public String userValidation(@ModelAttribute("userid") int userid, @ModelAttribute("password") String password,
-			@ModelAttribute("level") String level, HttpServletRequest request, HttpServletResponse response) {
+			@ModelAttribute("level") String level, HttpServletRequest request) {
 		ArrayList<User> users = findAllUsers();
 		for (User u1 : users) {
 			if (u1.getUserId() == userid) {
 				if (u1.getPassword().equals(password)) {
 					request.getSession().setAttribute("user", u1);
+					getBySession(request);
 					if (u1.get_userAccess().name().equals(level)) {
 						if (u1.get_userAccess().name() == "Admin") {
 							return "<html>" + "<head>" + "<title>Redirecting...</title>" + "</head>" + "<body>"
@@ -69,8 +74,6 @@ public class AssMController {
 
 	@GetMapping(value = "/register")
 	public String registerPage(Model model, HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute("user");
-		model.addAttribute("userId", user.getUserId());
 		return "Choose_Assessment";
 	}
 
