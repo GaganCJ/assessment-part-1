@@ -1,4 +1,4 @@
-package com.training.assessment;
+package com.training.assessment.bean;
 
 import java.time.LocalDate;
 import javax.persistence.Entity;

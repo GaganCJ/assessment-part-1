@@ -1,19 +1,22 @@
-package com.training.assessment;
+package com.training.assessment.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.training.assessment.bean.AssessmentTable;
+import com.training.assessment.bean.User;
+import com.training.assessment.repository.AssessRepo;
+import com.training.assessment.repository.UserRepo;
 
-@Controller
-public class AssMController {
+@RestController
+public class RestAPIController {
 
 	@Autowired
 	private UserRepo userRepo;
@@ -32,19 +35,17 @@ public class AssMController {
 		assessRepo.findAll().forEach(assess::add);
 		return assess;
 	}
-	
-	public User getBySession(HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute("user");
-		return user;
-	}
 
-	@RequestMapping(value = "/login")
-	public String loginUser() {
-		return "login";
+	@GetMapping(value = "/user")
+	public String getBySession(HttpServletRequest request) throws JsonProcessingException {
+		User user = (User) request.getSession().getAttribute("user");
+		ObjectMapper Obj = new ObjectMapper();
+		String jsonStr = "";
+		jsonStr = Obj.writeValueAsString(user);
+		return jsonStr;
 	}
 
 	@PostMapping(value = "/login/validate")
-	@ResponseBody
 	public String userValidation(@ModelAttribute("userid") int userid, @ModelAttribute("password") String password,
 			@ModelAttribute("level") String level, HttpServletRequest request) {
 		ArrayList<User> users = findAllUsers();
@@ -52,7 +53,6 @@ public class AssMController {
 			if (u1.getUserId() == userid) {
 				if (u1.getPassword().equals(password)) {
 					request.getSession().setAttribute("user", u1);
-					getBySession(request);
 					if (u1.get_userAccess().name().equals(level)) {
 						if (u1.get_userAccess().name() == "Admin") {
 							return "<html>" + "<head>" + "<title>Redirecting...</title>" + "</head>" + "<body>"
@@ -72,13 +72,7 @@ public class AssMController {
 		return "<a href='/login'>User ID does not exist, Try Again</a>";
 	}
 
-	@GetMapping(value = "/register")
-	public String registerPage(Model model, HttpServletRequest request) {
-		return "Choose_Assessment";
-	}
-
 	@GetMapping(value = "/logout")
-	@ResponseBody
 	public String logOutUser(HttpServletRequest request) {
 		request.getSession().removeAttribute("user");
 		return "<html>" + "<head>" + "<title>Redirecting...</title>" + "</head>" + "<body>"
@@ -87,7 +81,6 @@ public class AssMController {
 	}
 
 	@PostMapping(value = "/register/technical")
-	@ResponseBody
 	public String regTech(@ModelAttribute("assessment") String skill, @ModelAttribute("dateof") String dateof,
 			HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("user");
@@ -97,12 +90,10 @@ public class AssMController {
 		int day = Integer.parseInt(dateof.substring(8, 10));
 		AssessmentTable a1 = new AssessmentTable(userId, skill, LocalDate.of(year, month, day), "TECH");
 		assessRepo.save(a1);
-		request.getSession().removeAttribute("user");
 		return "OK";
 	}
 
 	@PostMapping(value = "/register/behavioral")
-	@ResponseBody
 	public String regBehv(@ModelAttribute("assessment") String skill, @ModelAttribute("dateof") String dateof,
 			HttpServletRequest request) {
 		User user = (User) request.getSession().getAttribute("user");
@@ -112,14 +103,7 @@ public class AssMController {
 		int day = Integer.parseInt(dateof.substring(8, 10));
 		AssessmentTable a1 = new AssessmentTable(userId, skill, LocalDate.of(year, month, day), "BEHV");
 		assessRepo.save(a1);
-		request.getSession().removeAttribute("user");
 		return "OK";
-	}
-
-	@GetMapping(value = "/admin/registeredlist")
-	public String returnList(Model model) {
-		model.addAttribute("assess_list", ass_tbl());
-		return "AssessmentList";
 	}
 
 }

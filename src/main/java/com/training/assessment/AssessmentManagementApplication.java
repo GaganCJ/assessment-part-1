@@ -3,7 +3,7 @@ package com.training.assessment;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.training.assessment.controller"})
 public class AssessmentManagementApplication {
 
 	public static void main(String[] args) {

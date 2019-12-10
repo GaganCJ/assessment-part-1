@@ -57,8 +57,7 @@
 												<label for="usedid" class="col-md-3 control-label">User
 													ID</label>
 												<div class="col-md-9">
-													<input type="text" class="form-control" name="userid" id="userId"
-														disabled>
+													<input type="text" class="form-control userId" name="userid" disabled>
 												</div>
 											</div>
 											<div class="form-group">
@@ -129,8 +128,7 @@
 												<label for="usedid" class="col-md-3 control-label">User
 													ID</label>
 												<div class="col-md-9">
-													<input type="text" class="form-control" name="userid" id="userId"
-														disabled>
+													<input type="text" class="form-control userId" name="userid" disabled>
 												</div>
 											</div>
 											<div class="form-group">
@@ -173,7 +171,13 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
-		
+		$.ajax({
+			url: "http://localhost:7070/user"
+		}).then(function(data){
+			var obj = JSON.parse(data);
+			$('.userId').val(obj.userId);
+			$('.userId').placeholder(obj.userId);
+		})
 	});
 </script>
 </html>

@@ -1,4 +1,4 @@
-package com.training.assessment;
+package com.training.assessment.controller;
 
 import java.time.LocalDate;
 
@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-
-import com.training.assessment.User.userAccess;
+import com.training.assessment.bean.User.userAccess;
+import com.training.assessment.bean.AssessmentTable;
+import com.training.assessment.bean.User;
+import com.training.assessment.repository.AssessRepo;
+import com.training.assessment.repository.UserRepo;
 
 @Component
 public class InitialLoader implements ApplicationListener<ContextRefreshedEvent>{
@@ -47,10 +50,10 @@ public class InitialLoader implements ApplicationListener<ContextRefreshedEvent>
 		AssessmentTable tbl1 = new AssessmentTable(1088,"Java",LocalDate.of(2019, 12, 12),"TECH");
 		assessRepo.save(tbl1);
 		
-		AssessmentTable tbl2 = new AssessmentTable(1088,"Python",LocalDate.of(2019, 12, 13),"TECH");
+		AssessmentTable tbl2 = new AssessmentTable(2192,"Python",LocalDate.of(2019, 12, 13),"TECH");
 		assessRepo.save(tbl2);
 		
-		AssessmentTable tbl3 = new AssessmentTable(1088,"C++",LocalDate.of(2019, 12, 14),"TECH");
+		AssessmentTable tbl3 = new AssessmentTable(3122,"C++",LocalDate.of(2019, 12, 14),"TECH");
 		assessRepo.save(tbl3);
 		
 		AssessmentTable tbl4 = new AssessmentTable(1088,"Step Plus",LocalDate.of(2019, 12, 15),"BEHV");
